@@ -5,7 +5,7 @@ CK = config.CONSUMER_KEY
 CS = config.CONSUMER_SECRET
 AT = config.ACCESS_TOKEN
 ATS = config.ACCESS_TOKEN_SECRET
-twitter = OAuth1Session(CK, CS, AT, ATS) #認証処理
+twitter = OAuth1Session(CK, CS, AT, ATS) 
 
 url = "https://api.twitter.com/1.1/statuses/user_timeline.json" #タイムライン取得エンドポイント
 
