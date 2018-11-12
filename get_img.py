@@ -21,10 +21,6 @@ def get_tweets( screen_name, key_dict ):
     return response
 
 
-def sort_by_fav( tweets ):
-    return sorted( tweets, key = lambda x: x['favorite_count'], reverse = True )
-
-
 if __name__ == "__main__":
     CK = config.CONSUMER_KEY
     CS = config.CONSUMER_SECRET
@@ -51,12 +47,16 @@ if __name__ == "__main__":
         print("API  reset: {}".format( reset ) )
 
         tweets = json.loads( response.text )
-        tweets = sort_by_fav( tweets )
         for tweet in tweets:
-            print(tweet['user']['name']+'::'+tweet['text'])
-            print(tweet['favorite_count'])
-            print(tweet['created_at'])
-            print('*******************************************')
+            try:
+                image_list = tweet['extended_entities']['media']
+                for image in image_list:
+                    url = image['media_url']
+                    url_large = url + ':large'
+                    print( url_large )
+                    
+            except KeyError:
+                print("画像を含んでいないツイート")
     else:
         print("##ERROR## status_code: {}".format( response.status_code ) )
 
